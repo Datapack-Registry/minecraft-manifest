@@ -1,3 +1,3 @@
-import actionsCore from 'https://esm.sh/@actions/core@1.10.1?target=nodenext';
+import actionsCore from '@actions/core@1.10.1';
 
 console.log(actionsCore.getInput('manifest-url'))
