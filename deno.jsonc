@@ -1,0 +1,50 @@
+{
+  "tasks": {
+      "build": "deno run -A ./build.config.ts",
+      "build:watch": "deno run -A ./build.config.ts --watch",
+      "build:dev": "deno run -A ./build.config.ts --develope",
+      "build:dev:watch": "deno run -A ./build.config.ts --develope --watch",
+      "lint": "deno lint",
+      "test": "deno test -A --unstable --check --reload --doc --allow-none --junit-path=\"./report.xml\""
+  },
+  "exclude": [
+      "./dist/"
+  ],
+  "test": {
+      "include": [
+          "**/*.test.ts"
+      ]
+  },
+  "compilerOptions": {
+      "lib": [
+          "ES6",
+          "DOM",
+          "DOM.Iterable"
+      ]
+  },
+  "fmt": {
+      "singleQuote": true,
+      "lineWidth": 120
+  },
+  "lint": {
+      "rules": {
+          "tags": [
+              "recommended"
+          ],
+          "include": [
+              "camelcase",
+              "default-param-last",
+              "eqeqeq",
+              "explicit-function-return-type",
+              "explicit-module-boundary-types",
+              "guard-for-in",
+              "no-eval",
+              "no-sparse-arrays",
+              "prefer-ascii"
+          ],
+          "exclude": [
+              "no-inferrable-types"
+          ]
+      }
+  }
+}

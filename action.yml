@@ -1,0 +1,20 @@
+name: 'Minecraft Version Manifest Info'
+description: 'A GitHub action to get infos about minecraft version manifest.'
+author: '@Mqxx'
+inputs:
+  manifest-url:
+    description: 'An URL to the version manifest.'
+    default: 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'
+    required: false
+
+outputs:
+  version-latest-release:
+    description: 'The latest Minecraft release version.'
+
+  version-latest-snapshot:
+    description: 'The latest Minecraft snapshot version.'
+
+runs:
+  using: 'node20'
+  main: 'dist/bundle.min.js'
+  
