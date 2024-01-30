@@ -23,6 +23,9 @@ jobs:
         uses: denoland/setup-deno@v1.1.4
         with:
           deno-version: ${{env.deno-version}}
+
+      - name: Bundle
+        run: deno task build
       
       - name: 'Use Template with manifest-url: "Test URL"'
         uses: Datapack-Registry/minecraft-manifest@main
