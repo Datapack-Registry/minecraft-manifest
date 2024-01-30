@@ -12,10 +12,17 @@ jobs:
   test:
     name: 'Action Template'
     runs-on: ubuntu-latest
+    env:
+      deno-version: v1.x
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
         uses: actions/checkout@v4
+      
+      - name: Setup Deno (${{env.deno-version}})
+        uses: denoland/setup-deno@v1.1.4
+        with:
+          deno-version: ${{env.deno-version}}
       
       - name: 'Use Template with manifest-url: "Test URL"'
         uses: Datapack-Registry/minecraft-manifest@main
