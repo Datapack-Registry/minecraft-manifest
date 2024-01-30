@@ -39,5 +39,8 @@
         "no-inferrable-types"
       ]
     }
+  },
+  "imports": {
+    "@actions/core@1.10.1": "npm:@actions/core@1.10.1"
   }
 }
