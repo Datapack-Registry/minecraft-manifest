@@ -21,7 +21,7 @@ const tsConfig : esbuild.BuildOptions = {
   entryPoints: [
     './src/index.ts'
   ],
-  format: 'cjs'
+  format: 'esm'
 }
 
 const timestampNow = Date.now();
