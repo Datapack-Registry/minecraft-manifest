@@ -1,16 +1,17 @@
-name: 'Action Template'
+name: 'Build'
 
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'main'
 
 permissions:
   contents: read
-  pages: write
   checks: write
 
 jobs:
   test:
-    name: 'Action Template'
+    name: 'Build'
     runs-on: ubuntu-latest
     env:
       deno-version: v1.x
@@ -26,12 +27,3 @@ jobs:
 
       - name: Bundle
         run: deno task build
-      
-      - name: 'Use Template with manifest-url: "Test URL"'
-        uses: Datapack-Registry/minecraft-manifest@main
-        with:
-          manifest-url: 'Test URL'
-
-      - name: 'Use Template with manifest-url: default'
-        uses: Datapack-Registry/minecraft-manifest@main
-        
