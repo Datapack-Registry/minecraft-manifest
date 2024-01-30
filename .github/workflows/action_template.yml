@@ -1,0 +1,27 @@
+name: 'Action Template'
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  checks: write
+
+jobs:
+  test:
+    name: 'Action Template'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 'Setup Repository (${{github.event.repository.name}})'
+        uses: actions/checkout@v4
+      
+      - name: 'Use Template with manifest-url: "Test URL"'
+        uses: Datapack-Registry/minecraft-manifest@main
+        with:
+          manifest-url: 'Test URL'
+
+      - name: 'Use Template with manifest-url: default'
+        uses: Datapack-Registry/minecraft-manifest@main
+        
