@@ -20,7 +20,8 @@ const tsConfig : esbuild.BuildOptions = {
   outfile: './dist/bundle.min.js',
   entryPoints: [
     './src/index.ts'
-  ]
+  ],
+  format: 'cjs'
 }
 
 const timestampNow = Date.now();
