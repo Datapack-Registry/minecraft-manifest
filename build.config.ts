@@ -22,8 +22,7 @@ const tsConfig : esbuild.BuildOptions = {
     './src/index.ts'
   ],
   format: 'esm',
-  platform: 'node',
-  packages: 'external'
+  platform: 'node'
 }
 
 const timestampNow = Date.now();
