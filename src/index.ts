@@ -15,17 +15,17 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   console.log(__dirname, latestManifest);
   
 
-  fs.mkdir(`${cationsGithub.context.repo.repo}/data`, {recursive: true})
+  fs.mkdir(`${__dirname}/data`, {recursive: true})
   await fs.writeFile(
-    `${cationsGithub.context.repo.repo}/data/latest_manifest.json`,
+    `${__dirname}/data/latest_manifest.json`,
     JSON.stringify(latestManifest)
   )
   
 
   artifactClient.uploadArtifact(
     'latest-manifest',
-    [`${cationsGithub.context.repo.repo}/data/latest_manifest.json`],
-    `${cationsGithub.context.repo.repo}/data`
+    [`${__dirname}/data/latest_manifest.json`],
+    `${__dirname}/data`
   )
   
   // const artifacts = await artifactClient.listArtifacts({latest: true})
