@@ -22,5 +22,3 @@ jobs:
       
       - name: 'Test Action'
         uses: Datapack-Registry/minecraft-manifest@main
-        with:
-          manifest-url: 'Test123'
