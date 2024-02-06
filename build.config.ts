@@ -1,4 +1,3 @@
-/// <reference lib="deno.ns" />
 import * as esbuild from 'https://deno.land/x/esbuild@v0.19.12/mod.js';
 import { green } from 'https://deno.land/std@0.211.0/fmt/colors.ts';
 import { parseArgs } from 'https://deno.land/std@0.211.0/cli/parse_args.ts';
