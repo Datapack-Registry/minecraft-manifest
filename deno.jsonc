@@ -39,5 +39,8 @@
         "no-inferrable-types"
       ]
     }
+  },
+  "imports": {
+    "fs": "node:fs"
   }
 }
