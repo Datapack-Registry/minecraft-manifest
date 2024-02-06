@@ -25,11 +25,11 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: 'Setup Repository (${{github.event.repository.name}})'
         id: checkout
         uses: actions/checkout@v4
 
-      - name: Setup Deno
+      - name: 'Setup Deno'
         id: setup-deno
         uses: denoland/setup-deno@v1
         with:
