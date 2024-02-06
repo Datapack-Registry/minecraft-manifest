@@ -15,17 +15,17 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   console.log(__dirname, latestManifest);
   
 
-  fs.mkdir(`/data`, {recursive: true})
+  fs.mkdir(`./data`, {recursive: true})
   await fs.writeFile(
-    `/data/latest_manifest.json`,
+    `./data/latest_manifest.json`,
     JSON.stringify(latestManifest)
   )
   
 
   artifactClient.uploadArtifact(
     'manifest',
-    [`/data/latest_manifest.json`],
-    `/data`
+    [`./data/latest_manifest.json`],
+    `./data`
   )
   
   // const artifacts = await artifactClient.listArtifacts({latest: true})
