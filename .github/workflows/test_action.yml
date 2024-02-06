@@ -4,7 +4,7 @@ on:
   push:
     branches:
       - 'main'
-      
+
   workflow_dispatch:
 
 permissions:
@@ -15,8 +15,6 @@ jobs:
   test:
     name: 'Test Action'
     runs-on: ubuntu-latest
-    env:
-      deno-version: v1.x
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
