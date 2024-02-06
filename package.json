@@ -1,6 +1,6 @@
 {
   "name": "minecraft-manifest",
-  "description": "A GitHub action to get infos about the minecraft manifest versions.",
+  "description": "A GitHub action to get infos about the Minecraft manifest versions.",
   "version": "0.1.0",
   "author": "Mqxx",
   "private": true,
