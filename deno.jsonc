@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "build": "deno run -A ./build.config.ts",
+    "build": "deno run -A --node-modules-dir ./build.config.ts",
     "build:watch": "deno run -A ./build.config.ts --watch",
     "build:dev": "deno run -A ./build.config.ts --develope",
     "build:dev:watch": "deno run -A ./build.config.ts --develope --watch",
