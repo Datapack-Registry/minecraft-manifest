@@ -1,5 +1,6 @@
 import * as actionsCore from '@actions/core';
 import * as actionsArtifact from '@actions/artifact';
+import * as fs from 'fs';
 
 const artifactClient = new actionsArtifact.DefaultArtifactClient();
 
@@ -9,7 +10,7 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
-  Deno.writeTextFileSync(
+  fs.writeFileSync(
     './data/latest_manifest.json',
     JSON.stringify(latestManifest)
   )
