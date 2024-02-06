@@ -1,6 +1,6 @@
 name: 'Minecraft Version Manifest Info'
 description: 'A GitHub action to get infos about minecraft version manifest.'
-author: '@Mqxx'
+author: 'Mqxx'
 inputs:
   manifest-url:
     description: 'An URL to the version manifest.'
