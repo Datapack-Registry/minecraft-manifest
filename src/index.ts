@@ -16,9 +16,9 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
     './data/latest_manifest.json',
     JSON.stringify(latestManifest)
   )
-  
+
   artifactClient.uploadArtifact(
-    'latest_manifest',
+    'latest-manifest',
     ['latest_manifest.json'],
     './data'
   )
