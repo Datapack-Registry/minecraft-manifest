@@ -12,7 +12,7 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
 
-  console.log(__dirname, latestManifest);
+  console.log(latestManifest);
   
 
   fs.mkdir(`./data`, {recursive: true})
