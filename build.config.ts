@@ -21,6 +21,7 @@ const tsConfig : esbuild.BuildOptions = {
   entryPoints: [
     './src/index.ts'
   ],
+  bundle: true,
   platform: 'node',
   target: 'node20'
 }
