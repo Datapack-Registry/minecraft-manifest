@@ -41,6 +41,6 @@
     }
   },
   "imports": {
-    "fs": "node:fs"
+    "fs/promises": "node:fs/promises"
   }
 }
