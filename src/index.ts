@@ -1,18 +1,27 @@
 import * as actionsCore from '@actions/core';
 import * as actionsArtifact from '@actions/artifact';
 
-const artifact = new actionsArtifact.DefaultArtifactClient();
+const artifactClient = new actionsArtifact.DefaultArtifactClient();
 
-// import { fetchManifestData } from './fetch_manifest_data.ts';
+import { fetchManifestData } from './fetch_manifest_data.ts';
 
-// const inputManifestURL = actionsCore.getInput('manifest-url');
+const inputManifestURL = actionsCore.getInput('manifest-url');
 
 (async () => {
-  // console.log((await fetchManifestData(inputManifestURL)).latest);
+  const latestManifest = (await fetchManifestData(inputManifestURL)).latest
+  Deno.writeTextFileSync(
+    './data/latest_manifest.json',
+    JSON.stringify(latestManifest)
+  )
+  artifactClient.uploadArtifact(
+    'latest_manifest.json',
+    ['./data/latest_manifest.json'],
+    './data/latest_manifest.json'
+  )
   
-  const artifacts = await artifact.listArtifacts({latest: true})
-  artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
-    console.log(createdAt, id, name, size);
-  })
+  // const artifacts = await artifactClient.listArtifacts({latest: true})
+  // artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
+  //   console.log(createdAt, id, name, size);
+  // })
 })()
 
