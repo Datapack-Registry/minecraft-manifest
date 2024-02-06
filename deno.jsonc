@@ -41,6 +41,8 @@
     }
   },
   "imports": {
-    "fs/promises": "node:fs/promises"
+    "fs/promises": "node:fs/promises",
+    "@actions/core": "npm:@actions/core",
+    "@actions/github": "npm:@actions/github"
   }
 }
