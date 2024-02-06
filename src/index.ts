@@ -11,7 +11,8 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
   fs.mkdir('./data', {recursive: true})
-  await fs.writeFile(
+  
+  await fs.appendFile(
     './data/latest_manifest.json',
     JSON.stringify(latestManifest)
   )
