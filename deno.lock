@@ -3,7 +3,10 @@
   "packages": {
     "specifiers": {
       "npm:@actions/core@1.10.1": "npm:@actions/core@1.10.1",
-      "npm:@types/node": "npm:@types/node@18.16.19"
+      "npm:@actions/core@^1.10.1": "npm:@actions/core@1.10.1",
+      "npm:@types/node": "npm:@types/node@18.16.19",
+      "npm:@types/node@^20.11.10": "npm:@types/node@20.11.16",
+      "npm:typescript@^5.3.3": "npm:typescript@5.3.3"
     },
     "npm": {
       "@actions/core@1.10.1": {
@@ -28,8 +31,22 @@
         "integrity": "sha512-IXl7o+R9iti9eBW4Wg2hx1xQDig183jj7YLn8F7udNceyfkbn1ZxmzZXuak20gR40D7pIkIY1kYGx5VIGbaHKA==",
         "dependencies": {}
       },
+      "@types/node@20.11.16": {
+        "integrity": "sha512-gKb0enTmRCzXSSUJDq6/sPcqrfCv2mkkG6Jt/clpn5eiCbKTY+SgZUxo+p8ZKMof5dCp9vHQUAB7wOUTod22wQ==",
+        "dependencies": {
+          "undici-types": "undici-types@5.26.5"
+        }
+      },
       "tunnel@0.0.6": {
         "integrity": "sha512-1h/Lnq9yajKY2PEbBadPXj3VxsDDu844OnaAo52UVmIzIvwwtBPIuNvkjuzBlTWpfJyUbG3ez0KSBibQkj4ojg==",
+        "dependencies": {}
+      },
+      "typescript@5.3.3": {
+        "integrity": "sha512-pXWcraxM0uxAS+tN0AG/BF2TyqmHO014Z070UsJ+pFvYuRSq8KH8DmWpnbXe0pEPDHXZV3FcAbJkijJ5oNEnWw==",
+        "dependencies": {}
+      },
+      "undici-types@5.26.5": {
+        "integrity": "sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==",
         "dependencies": {}
       },
       "undici@5.28.3": {

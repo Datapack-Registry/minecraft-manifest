@@ -1,3 +1,9 @@
 import * as actionsCore from '@actions/core';
+import { fetchManifestData } from './fetch_manifest_data.ts';
 
-console.log(actionsCore.getInput('manifest-url'));
+const inputManifestURL = actionsCore.getInput('manifest-url');
+
+(async () => {
+  console.log((await fetchManifestData(inputManifestURL)).latest);
+})()
+
