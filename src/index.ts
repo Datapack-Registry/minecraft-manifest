@@ -1,4 +1,5 @@
 import * as actionsCore from '@actions/core';
+import * as github from '@actions/github';
 import * as actionsArtifact from '@actions/artifact';
 import * as fs from 'fs/promises';
 
@@ -10,17 +11,17 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
-  fs.mkdir('./data', {recursive: true})
+  fs.mkdir(`${github.context.repo}/data`, {recursive: true})
   
   await fs.writeFile(
-    './data/latest_manifest.json',
+    `${github.context.repo}/data/latest_manifest.json`,
     JSON.stringify(latestManifest)
   )
 
   artifactClient.uploadArtifact(
     'latest-manifest',
-    ['./data/latest_manifest.json'],
-    './data'
+    [`${github.context.repo}/data/latest_manifest.json`],
+    `${github.context.repo}/data`
   )
   
   // const artifacts = await artifactClient.listArtifacts({latest: true})
