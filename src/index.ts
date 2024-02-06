@@ -1,6 +1,6 @@
 import * as actionsCore from '@actions/core';
 import * as actionsArtifact from '@actions/artifact';
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 
 const artifactClient = new actionsArtifact.DefaultArtifactClient();
 
@@ -10,7 +10,8 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
-  fs.writeFileSync(
+  fs.mkdir('./data', {recursive: true})
+  await fs.writeFile(
     './data/latest_manifest.json',
     JSON.stringify(latestManifest)
   )
