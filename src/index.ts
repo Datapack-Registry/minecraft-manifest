@@ -13,12 +13,9 @@ const githubToken = actionsCore.getInput('token');
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
 
-  console.log('Fetching:', latestManifest);
-  console.log('Token length:', githubToken.length);
+  console.log('Latest manifest fetched:', latestManifest);
 
   try {
-    
-
     const artifacts = await artifactClient.listArtifacts({findBy: {
       repositoryName: actionsGithub.context.repo.repo,
       repositoryOwner: actionsGithub.context.repo.owner,
