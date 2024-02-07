@@ -1,5 +1,5 @@
 import * as actionsCore from '@actions/core';
-import * as cationsGithub from '@actions/github';
+import * as actionsGithub from '@actions/github';
 import * as actionsArtifact from '@actions/artifact';
 import * as fs from 'fs/promises';
 
