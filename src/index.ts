@@ -28,7 +28,7 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   
   try {
     await artifactClient.uploadArtifact(
-      'latest-manifest.ts',
+      'latest-manifest',
       [`./data/latest_manifest.json`],
       `./data`
     )
