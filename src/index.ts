@@ -13,18 +13,25 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
 
   console.log('Fetching:', latestManifest);
+  console.log('Token length:', process.env['GITHUB_TOKEN'].length);
 
-  const artifacts = await artifactClient.listArtifacts({findBy: {
-    repositoryName: actionsGithub.context.repo.repo,
-    repositoryOwner: actionsGithub.context.repo.owner,
-    token: process.env['GITHUB_TOKEN'],
-    workflowRunId: 1
-  }})
-  console.log('Artifact found:');
-  
-  artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
-    console.log(createdAt, id, name, size);
-  })
+  try {
+    
+
+    const artifacts = await artifactClient.listArtifacts({findBy: {
+      repositoryName: actionsGithub.context.repo.repo,
+      repositoryOwner: actionsGithub.context.repo.owner,
+      token: process.env['GITHUB_TOKEN'],
+      workflowRunId: 1
+    }})
+    console.log('Artifact found:');
+    
+    artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
+      console.log(createdAt, id, name, size);
+    })
+  } catch (error) {
+    console.log(error);
+  }
   
 
   await fs.mkdir(`./data`, {recursive: true})
