@@ -15,8 +15,10 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   console.log('Fetching:', latestManifest);
 
   const artifacts = await artifactClient.listArtifacts({latest: true})
+  console.log('Artifact found:');
+  
   artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
-    console.log('Artifact found:', createdAt, id, name, size);
+    console.log(createdAt, id, name, size);
   })
   
 
