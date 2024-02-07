@@ -7,9 +7,8 @@ inputs:
     default: 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'
     required: false
   token:
-    description: 'Github token.'
-    default: ${{secrets.GITHUB_TOKEN}}
-    required: false
+    description: 'GitHub token.'
+    required: true
 
 outputs:
   version-latest-release:
