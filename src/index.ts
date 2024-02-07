@@ -22,14 +22,13 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   )
   
   try {
-    artifactClient.uploadArtifact(
-      'manifest',
+    await artifactClient.uploadArtifact(
+      'latest_manifest',
       [`./data/latest_manifest.json`],
       `./data`
     )
   } catch (error) {
     console.log(error);
-    
   }
 
   
