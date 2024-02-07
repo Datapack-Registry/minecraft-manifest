@@ -21,12 +21,17 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
     JSON.stringify(latestManifest)
   )
   
+  try {
+    artifactClient.uploadArtifact(
+      'manifest',
+      [`./data/latest_manifest.json`],
+      `./data`
+    )
+  } catch (error) {
+    console.log(error);
+    
+  }
 
-  artifactClient.uploadArtifact(
-    'manifest.zip',
-    [`./data/latest_manifest.json`],
-    `./data`
-  )
   
   // const artifacts = await artifactClient.listArtifacts({latest: true})
   // artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
