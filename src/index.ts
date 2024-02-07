@@ -8,12 +8,13 @@ const artifactClient = new actionsArtifact.DefaultArtifactClient();
 import { fetchManifestData } from './fetch_manifest_data.ts';
 
 const inputManifestURL = actionsCore.getInput('manifest-url');
+const githubToken = actionsCore.getInput('token');
 
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
 
   console.log('Fetching:', latestManifest);
-  console.log('Token length:', process.env['GITHUB_TOKEN'].length);
+  console.log('Token length:', githubToken.length);
 
   try {
     
@@ -21,7 +22,7 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
     const artifacts = await artifactClient.listArtifacts({findBy: {
       repositoryName: actionsGithub.context.repo.repo,
       repositoryOwner: actionsGithub.context.repo.owner,
-      token: process.env['GITHUB_TOKEN'],
+      token: githubToken,
       workflowRunId: 1
     }})
     console.log('Artifact found:');
