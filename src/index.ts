@@ -14,7 +14,12 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 
   console.log('Fetching:', latestManifest);
 
-  const artifacts = await artifactClient.listArtifacts({latest: true})
+  const artifacts = await artifactClient.listArtifacts({findBy: {
+    repositoryName: actionsGithub.context.repo.repo,
+    repositoryOwner: actionsGithub.context.repo.owner,
+    token: process.env['GITHUB_TOKEN'],
+    workflowRunId: 1
+  }})
   console.log('Artifact found:');
   
   artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
