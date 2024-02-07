@@ -14,10 +14,9 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 
   console.log('Fetching:', latestManifest);
 
-  const artifacts = await artifactClient.listArtifacts({latest: true})
-  artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
-    console.log('Artifact found:', createdAt, id, name, size);
-  })
+  const lastArtifact = (await artifactClient.getArtifact('latest-manifest')).artifact
+
+  console.log('Artifact found:', lastArtifact.createdAt, lastArtifact.id, lastArtifact.name, lastArtifact.size);
   
 
   await fs.mkdir(`./data`, {recursive: true})
