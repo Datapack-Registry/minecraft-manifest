@@ -12,7 +12,12 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 (async () => {
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
 
-  console.log(latestManifest);
+  console.log('Fetching:', latestManifest);
+
+  const artifacts = await artifactClient.listArtifacts({latest: true})
+  artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
+    console.log('Artifact found:', createdAt, id, name, size);
+  })
   
 
   await fs.mkdir(`./data`, {recursive: true})
@@ -32,9 +37,6 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   }
 
   
-  // const artifacts = await artifactClient.listArtifacts({latest: true})
-  // artifacts.artifacts.forEach(({createdAt, id, name, size}) => {
-  //   console.log(createdAt, id, name, size);
-  // })
+  
 })()
 
