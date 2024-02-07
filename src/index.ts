@@ -15,7 +15,7 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
   console.log(latestManifest);
   
 
-  fs.mkdir(`./data`, {recursive: true})
+  await fs.mkdir(`./data`, {recursive: true})
   await fs.writeFile(
     `./data/latest_manifest.json`,
     JSON.stringify(latestManifest)
