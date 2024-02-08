@@ -13,10 +13,15 @@ const githubToken = actionsCore.getInput('token');
 
 (async () => {
   // download artifact from previous run and compare it to currentManifest data...
+  console.log('Listing Artifacts...');
+  
   (await artifactClient.listArtifacts()).artifacts.forEach((artifact) => {
     console.log('Artifact found:', artifact.createdAt, artifact.name, artifact.id, artifact.size);
     
   })
+
+  console.log('Listing Artifacts... Done!');
+  
 
   const currentManifest = (await fetchManifestData(inputManifestURL)).latest
   
