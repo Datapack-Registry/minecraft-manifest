@@ -12,23 +12,17 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 const githubToken = actionsCore.getInput('token');
 
 (async () => {
-  // download artifact from previous run and compare it to currentManifest data...
   console.log('Listing Artifacts...');
-  
-  (await artifactClient.listArtifacts({findBy: {
-    repositoryName: actionsGithub.context.repo.repo, 
-    repositoryOwner: actionsGithub.context.repo.owner, 
-    token: githubToken, 
-    workflowRunId: actionsGithub.context.runId
-  }})).artifacts.forEach((artifact) => {
+  (await artifactClient.listArtifacts()).artifacts.forEach((artifact) => {
     console.log('Artifact found:', artifact.createdAt, artifact.name, artifact.id, artifact.size);
-    
   })
-
   console.log('Listing Artifacts... Done!');
   
 
-  const currentManifest = (await fetchManifestData(inputManifestURL)).latest
+  const currentManifest = {
+    latest: '',
+    snapshot: ''
+  }
   
   console.log('latestManifest:', currentManifest);
   
