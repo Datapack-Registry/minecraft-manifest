@@ -24,7 +24,7 @@ const githubToken = actionsCore.getInput('token');
     snapshot: ''
   }
   
-  console.log('latestManifest:', currentManifest);
+  console.log('currentManifest:', currentManifest);
   
   await fs.mkdir(`./data`, {recursive: true})
   await fs.writeFile(
