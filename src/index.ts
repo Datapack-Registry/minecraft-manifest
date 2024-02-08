@@ -15,7 +15,12 @@ const githubToken = actionsCore.getInput('token');
   // download artifact from previous run and compare it to currentManifest data...
   console.log('Listing Artifacts...');
   
-  (await artifactClient.listArtifacts()).artifacts.forEach((artifact) => {
+  (await artifactClient.listArtifacts({findBy: {
+    repositoryName: actionsGithub.context.repo.repo, 
+    repositoryOwner: actionsGithub.context.repo.owner, 
+    token: githubToken, 
+    workflowRunId: actionsGithub.context.runId
+  }})).artifacts.forEach((artifact) => {
     console.log('Artifact found:', artifact.createdAt, artifact.name, artifact.id, artifact.size);
     
   })
