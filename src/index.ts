@@ -15,9 +15,10 @@ const githubToken = actionsCore.getInput('token');
   console.log('Listing Artifacts...');
   (await actionsGithub.getOctokit(githubToken).rest.actions.listArtifactsForRepo({
     owner: actionsGithub.context.repo.owner,
-    repo: actionsGithub.context.repo.repo
+    repo: actionsGithub.context.repo.repo,
+    name: 'manifest'
   })).data.artifacts.forEach((artifact) => {
-    console.log('Workflow found:', artifact);
+    console.log('Workflow found:', new Date(artifact.created_at ?? '').toLocaleString(), artifact);
   })
   console.log('Listing Artifacts... Done!');
 
