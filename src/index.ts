@@ -18,7 +18,7 @@ const githubToken = actionsCore.getInput('token');
     repo: actionsGithub.context.repo.repo,
     name: 'manifest'
   })).data.artifacts.forEach((artifact) => {
-    console.log('Workflow found:', new Date(artifact.created_at ?? '').toLocaleString(), artifact);
+    console.log('Artifact found:', new Date(artifact.created_at ?? '').toLocaleString());
   })
   console.log('Listing Artifacts... Done!');
 
