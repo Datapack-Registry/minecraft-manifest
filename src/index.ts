@@ -13,9 +13,10 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 const githubToken = actionsCore.getInput('token');
 
 (async () => {
-  const previousManifest = JSON.parse(await fs.readFile(actionsToolCach.find('latestManifest', '0.1.0'), {encoding: 'utf-8'}) || '{}');
+  // const previousManifest = JSON.parse(await fs.readFile(actionsToolCach.find('latestManifest', '0.1.0'), {encoding: 'utf-8'}) || '{}');
 
-  console.log('previousManifest:', previousManifest);
+  // console.log('previousManifest:', previousManifest);
+  console.log('previousManifest:', actionsToolCach.find('latestManifest', '0.1.0'));
 
   const latestManifest = (await fetchManifestData(inputManifestURL)).latest
   
