@@ -1,5 +1,5 @@
 import * as actionsCore from '@actions/core';
-import * as cationsGithub from '@actions/github';
+import * as actionsGithub from '@actions/github';
 import * as actionsArtifact from '@actions/artifact';
 import * as actionsToolCach from '@actions/tool-cache';
 import * as fs from 'fs/promises';
@@ -10,6 +10,7 @@ import { fetchManifestData } from './fetch_manifest_data.ts';
 const artifactClient = new actionsArtifact.DefaultArtifactClient();
 
 const inputManifestURL = actionsCore.getInput('manifest-url');
+const githubToken = actionsCore.getInput('token');
 
 (async () => {
   const previousManifest = JSON.parse(await fs.readFile(actionsToolCach.find('latestManifest', '0.1.0'), {encoding: 'utf-8'}) || '{}');

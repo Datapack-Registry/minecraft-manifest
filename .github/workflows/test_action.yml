@@ -9,12 +9,13 @@ on:
 
 permissions:
   contents: write
+  actions: read
   checks: write
 
 jobs:
   test:
     name: 'Test Action'
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-latest      
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
@@ -22,3 +23,5 @@ jobs:
       
       - name: 'Test Action'
         uses: Datapack-Registry/minecraft-manifest@main
+        with:
+          token: ${{secrets.GITHUB_TOKEN}}

@@ -22,7 +22,9 @@ const tsConfig : esbuild.BuildOptions = {
   ],
   bundle: true,
   platform: 'node',
-  target: 'node20'
+  target: 'node20',
+  sourcemap: 'external',
+  keepNames: true
 }
 
 const timestampNow = Date.now();
