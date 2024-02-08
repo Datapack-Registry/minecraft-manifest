@@ -13,14 +13,16 @@ const githubToken = actionsCore.getInput('token');
 
 (async () => {
   // download artifact from previous run and compare it to currentManifest data...
-  console.log('workflow:');
-  console.log(actionsGithub.context.runId, actionsGithub.context.runNumber);
+  (await artifactClient.listArtifacts()).artifacts.forEach((artifact) => {
+    console.log('Artifact found:', artifact.createdAt, artifact.name, artifact.id, artifact.size);
+    
+  })
 
   const currentManifest = (await fetchManifestData(inputManifestURL)).latest
   
   console.log('latestManifest:', currentManifest);
   
-  fs.mkdir(`./data`, {recursive: true})
+  await fs.mkdir(`./data`, {recursive: true})
   await fs.writeFile(
     './data/latest_manifest.json',
     JSON.stringify(currentManifest)
