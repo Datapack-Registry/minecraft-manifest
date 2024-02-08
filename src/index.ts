@@ -12,15 +12,19 @@ const inputManifestURL = actionsCore.getInput('manifest-url');
 const githubToken = actionsCore.getInput('token');
 
 (async () => {
-  console.log('Listing Artifacts...');
-  (await actionsGithub.getOctokit(githubToken).rest.actions.listArtifactsForRepo({
+  const artifacts = (await actionsGithub.getOctokit(githubToken).rest.actions.listArtifactsForRepo({
     owner: actionsGithub.context.repo.owner,
     repo: actionsGithub.context.repo.repo,
     name: 'manifest'
-  })).data.artifacts.forEach((artifact) => {
+  })).data.artifacts;
+  console.log('Listing Artifacts...');
+  artifacts.forEach((artifact) => {
     console.log('Artifact found:', new Date(artifact.created_at ?? '').toLocaleString('de-de'));
   })
   console.log('Listing Artifacts... Done!');
+
+  console.log('Latest Artifact found:', artifacts[0]);
+  
 
   const currentManifest = {
     latest: '',
