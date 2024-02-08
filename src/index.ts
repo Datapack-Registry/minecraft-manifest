@@ -14,7 +14,7 @@ const githubToken = actionsCore.getInput('token');
 (async () => {
   // download artifact from previous run and compare it to currentManifest data...
   console.log('workflow:');
-  console.log(actionsGithub.context.workflow);
+  console.log(actionsGithub.context.runId, actionsGithub.context.runNumber);
 
   const currentManifest = (await fetchManifestData(inputManifestURL)).latest
   
