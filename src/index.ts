@@ -18,6 +18,13 @@ const githubToken = actionsCore.getInput('token');
   })
   console.log('Listing Artifacts... Done!');
   
+  console.log('Listing Workflows...');
+  (await actionsGithub.getOctokit(githubToken).rest.actions.listRepoWorkflows({owner: actionsGithub.context.repo.owner, repo: actionsGithub.context.repo.repo})).data.workflows.forEach((workflow) => {
+    console.log('Workflow found:', workflow);
+  })
+  console.log('Listing Workflows... Done!');
+  
+  
 
   const currentManifest = {
     latest: '',
