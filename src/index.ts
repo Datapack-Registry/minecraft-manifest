@@ -28,6 +28,8 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
   
   actionsCore.startGroup('Getting artifacts...');
+  actionsCore.info('Searching existing artifacts...');
+
   const artifacts = await getArtifacts(
     githubToken,
     repositoryOwner,
@@ -35,9 +37,11 @@ const repositoryName = actionsGithub.context.repo.repo;
     'manifest'
   );
 
+  actionsCore.info(`Found ${artifacts.length} artifact${artifacts.length === 1 ? '' : 's'}.`);
+
   const previousArtifact = artifacts[0];
 
-  actionsCore.info('Found previous artifact:');
+  actionsCore.info('Previous artifact:');
   actionsCore.info(`- Name: ${previousArtifact.name}`);
   actionsCore.info(`- ID: ${previousArtifact.id}`);
   actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
