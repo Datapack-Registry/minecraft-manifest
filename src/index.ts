@@ -34,6 +34,8 @@ const repositoryName = actionsGithub.context.repo.repo;
     repositoryName,
     'manifest'
   );
+
+  actionsCore.endGroup();
   console.log('Found artifacts:', artifacts);
 
   const previousArtifact = artifacts[0];

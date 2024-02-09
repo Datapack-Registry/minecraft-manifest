@@ -7,6 +7,12 @@
     "lint": "deno lint",
     "test": "deno test -A --unstable --check --reload --doc --allow-none --junit-path=\"./report.xml\""
   },
+  "compilerOptions": {
+    "lib": [
+      "ESNext",
+      "dom"
+    ]
+  },
   "exclude": [
     "./dist/"
   ],
