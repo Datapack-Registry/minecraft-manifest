@@ -27,7 +27,7 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.setOutput('version-current-release', currentManifest.release);
   actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
   
-  actionsCore.startGroup('Getting artifacts...');
+  console.groupCollapsed('Getting artifacts...');
   const artifacts = await getArtifacts(
     githubToken,
     repositoryOwner,
@@ -35,17 +35,18 @@ const repositoryName = actionsGithub.context.repo.repo;
     'manifest'
   );
 
-  actionsCore.info('Found artifacts:');
+  console.groupCollapsed('Found artifacts:')
   artifacts.forEach((artifact) => {
-    actionsCore.startGroup(`Artifact: ${artifact.name}`);
+    console.groupCollapsed(`Artifact: ${artifact.name}`)
     actionsCore.info(`- ID: ${artifact.id}`);
     actionsCore.info(`- Node ID: ${artifact.node_id}`);
     actionsCore.info(`- Workflow ID: ${artifact.workflow_run?.id}`);
     actionsCore.info(`- Created at: ${artifact.created_at}`);
     actionsCore.info(`- Expires at: ${artifact.expires_at}`);
     actionsCore.info(`- Download: ${artifact.archive_download_url}`);
-    actionsCore.endGroup()
+    console.groupEnd()
   })
+  console.groupEnd()
 
   const previousArtifact = artifacts[0];
 
