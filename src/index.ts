@@ -17,15 +17,15 @@ const repositoryOwner = actionsGithub.context.repo.owner;
 const repositoryName = actionsGithub.context.repo.repo;
 
 (async () => {
-  console.log('Fetching current manifest version...');
+  actionsCore.startGroup('Fetching current manifest version...')
   const currentManifest = await fetchManifestData(inputManifestURL);
-  console.log('Found latest version:', currentManifest);
-  console.log('Fetching current manifest version... Done!');
+  actionsCore.info(`Found latest version: ${currentManifest}`);
+  actionsCore.endGroup();
 
   actionsCore.setOutput('version-current-release', currentManifest.release);
   actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
   
-  console.log('Getting artifacts...');
+  actionsCore.startGroup('Getting artifacts...');
   const artifacts = await getArtifacts(
     githubToken,
     repositoryOwner,
@@ -36,10 +36,10 @@ const repositoryName = actionsGithub.context.repo.repo;
 
   const previousArtifact = artifacts[0];
   console.log('Found previous artifact:', previousArtifact);
-  console.log('Getting artifacts... Done!');
+  actionsCore.endGroup();
 
   if (previousArtifact) {
-    console.log('Downloading previous artifact...');
+    actionsCore.startGroup('Downloading previous artifact...');
     await artifactClient.downloadArtifact(
       previousArtifact.id,
       {
@@ -52,26 +52,26 @@ const repositoryName = actionsGithub.context.repo.repo;
         path: './artifacts'
       }
     );
-    console.log('Downloading previous artifact... Done!');
+    actionsCore.endGroup();
 
-    console.log('Reading previous manifest...');
+    actionsCore.startGroup('Reading previous manifest...');
     const previousManifest = await readManifestFile('./artifacts/manifest.json');
-    console.log('Reading previous manifest... Done!');
+    actionsCore.endGroup();
 
     actionsCore.setOutput('version-previous-release', previousManifest?.release);
     actionsCore.setOutput('version-previous-snapshot', previousManifest?.snapshot);
   }
-
-  console.log('Writing new current manifest...');
-  await writeManifestFile('./artifacts/manifest.json', currentManifest);
-  console.log('Writing new current manifest... Done!');
   
-  console.log('Uploading new current artifact...');
+  actionsCore.startGroup('Writing new current manifest...');
+  await writeManifestFile('./artifacts/manifest.json', currentManifest);
+  actionsCore.endGroup();
+  
+  actionsCore.startGroup('Uploading new current artifact...');
   await artifactClient.uploadArtifact(
     'manifest',
     ['./artifacts/manifest.json'],
     './artifacts'
   )
-  console.log('Uploading new current artifact... Done!');
+  actionsCore.endGroup();
 })()
 
