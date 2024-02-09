@@ -20,7 +20,7 @@ const githubToken = actionsCore.getInput('token');
 
   console.log('Listing Artifacts...');
   artifacts.forEach((artifact) => {
-    console.log('Artifact found:', new Date(artifact.created_at ?? '').toLocaleString('de-de'));
+    console.log('Artifact found:', artifact.id, new Date(artifact.created_at ?? '').toLocaleString('de-de'));
   })
   console.log('Listing Artifacts... Done!');
 
@@ -36,23 +36,23 @@ const githubToken = actionsCore.getInput('token');
   }
   
 
-  const currentManifest = {
-    latest: '',
-    snapshot: ''
-  }
+  // const currentManifest = {
+  //   latest: '',
+  //   snapshot: ''
+  // }
   
-  console.log('currentManifest:', currentManifest);
+  // console.log('currentManifest:', currentManifest);
   
-  await fs.mkdir(`./data`, {recursive: true})
-  await fs.writeFile(
-    './data/manifest.json',
-    JSON.stringify(currentManifest)
-  )
+  // await fs.mkdir(`./data`, {recursive: true})
+  // await fs.writeFile(
+  //   './data/manifest.json',
+  //   JSON.stringify(currentManifest)
+  // )
 
-  artifactClient.uploadArtifact(
-    'manifest',
-    [`./data/manifest.json`],
-    `./data`
-  )
+  // artifactClient.uploadArtifact(
+  //   'manifest',
+  //   [`./data/manifest.json`],
+  //   `./data`
+  // )
 })()
 
