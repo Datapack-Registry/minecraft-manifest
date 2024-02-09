@@ -41,8 +41,10 @@ const githubToken = actionsCore.getInput('token');
     //   console.log('Downloading Artifact... Done');
     // });
 
-    actionsGithub.getOctokit(githubToken).request(`GET /repos/${actionsGithub.context.repo.owner}/${actionsGithub.context.repo.repo}/actions/artifacts/${artifacts[0].id}/zip`).then((response) => console.log(response));
+    await actionsGithub.getOctokit(githubToken).rest
 
+    await actionsGithub.getOctokit(githubToken).request(`GET /repos/${actionsGithub.context.repo.owner}/${actionsGithub.context.repo.repo}/actions/artifacts/${artifacts[0].id}/zip`).then((response) => console.log(response.data.blob()));
+    
     // await artifactClient.downloadArtifact(artifacts[0].id, {findBy: {
     //   repositoryOwner: actionsGithub.context.repo.owner,
     //   repositoryName: actionsGithub.context.repo.repo,
@@ -58,23 +60,23 @@ const githubToken = actionsCore.getInput('token');
     
   }
   
-  // const currentManifest = {
-  //   latest: '',
-  //   snapshot: ''
-  // }
+  const currentManifest = {
+    latest: '',
+    snapshot: ''
+  }
   
-  // console.log('currentManifest:', currentManifest);
+  console.log('currentManifest:', currentManifest);
   
-  // await fs.mkdir(`./data`, {recursive: true})
-  // await fs.writeFile(
-  //   './data/manifest.json',
-  //   JSON.stringify(currentManifest)
-  // )
+  await fs.mkdir(`./data`, {recursive: true})
+  await fs.writeFile(
+    './data/manifest.json',
+    JSON.stringify(currentManifest)
+  )
 
-  // artifactClient.uploadArtifact(
-  //   'manifest',
-  //   [`./data/manifest.json`],
-  //   `./data`
-  // )
+  artifactClient.uploadArtifact(
+    'manifest',
+    [`./data/manifest.json`],
+    `./data`
+  )
 })()
 
