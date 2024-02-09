@@ -35,10 +35,14 @@ const githubToken = actionsCore.getInput('token');
       token: githubToken,
       workflowRunId: artifacts[0].workflow_run?.id ?? 0
     }, path: './data'}).then((response) => {
-      console.log('Downloading Artifact:', response.downloadPath);
+      console.log('Downloading Artifact:', response);
     });
 
     console.log('Downloading Artifact... Done!');
+
+    console.log('Reading downloaded Artifact...');
+    console.log(await fs.readFile('./data/manifest.json', {encoding: 'utf-8'}))
+    console.log('Reading downloaded Artifact... Done!');
   } catch (error) {
     console.log(error);
     
