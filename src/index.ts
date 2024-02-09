@@ -27,7 +27,7 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.setOutput('version-current-release', currentManifest.release);
   actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
   
-  console.groupCollapsed('Getting artifacts...');
+  actionsCore.startGroup('Getting artifacts...');
   const artifacts = await getArtifacts(
     githubToken,
     repositoryOwner,
