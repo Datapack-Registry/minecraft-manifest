@@ -29,17 +29,20 @@ const githubToken = actionsCore.getInput('token');
   try {
     console.log('Downloading Artifact...');
     
-    await actionsGithub.getOctokit(githubToken).rest.actions.downloadArtifact({
-      owner: actionsGithub.context.repo.owner,
-      repo: actionsGithub.context.repo.repo,
-      name: 'manifest',
-      archive_format: 'zip',
-      artifact_id: artifacts[0].id
-    }).then((response) => {
-      console.log('Downloading Artifact...');
-      console.log(response.data);
-      console.log('Downloading Artifact... Done');
-    });
+    // await actionsGithub.getOctokit(githubToken).rest.actions.downloadArtifact({
+    //   owner: actionsGithub.context.repo.owner,
+    //   repo: actionsGithub.context.repo.repo,
+    //   name: 'manifest',
+    //   archive_format: 'zip',
+    //   artifact_id: artifacts[0].id
+    // }).then((response) => {
+    //   console.log('Downloading Artifact...');
+    //   console.log(response.data);
+    //   console.log('Downloading Artifact... Done');
+    // });
+
+    actionsGithub.getOctokit(githubToken).request(`GET /repos/${actionsGithub.context.repo.owner}/${actionsGithub.context.repo.repo}/actions/artifacts/${artifacts[0].id}/zip`).then((response) => console.log(response));
+
     // await artifactClient.downloadArtifact(artifacts[0].id, {findBy: {
     //   repositoryOwner: actionsGithub.context.repo.owner,
     //   repositoryName: actionsGithub.context.repo.repo,
@@ -55,7 +58,6 @@ const githubToken = actionsCore.getInput('token');
     
   }
   
-
   // const currentManifest = {
   //   latest: '',
   //   snapshot: ''
