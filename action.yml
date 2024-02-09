@@ -11,6 +11,15 @@ inputs:
     required: true
 
 outputs:
+  version-changed:
+    description: 'Whether the release or snapshot version has changed.'
+
+  version-release-changed:
+    description: 'Whether the release version has changed.'
+  
+  version-snapshot-changed:
+    description: 'Whether the snapshot version has changed.'
+
   version-current-release:
     description: 'The current Minecraft release version fetched.'
 
@@ -22,6 +31,7 @@ outputs:
 
   version-previous-snapshot:
     description: 'The previous Minecraft snapshot version fetched.'
+  
 
 runs:
   using: 'node20'

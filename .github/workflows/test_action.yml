@@ -29,6 +29,10 @@ jobs:
       
       - name: 'Print'
         run: |
+          echo "${{steps.test-action.outputs.version-changed}}"
+          echo "${{steps.test-action.outputs.version-release-changed}}"
+          echo "${{steps.test-action.outputs.version-snapshot-changed}}"
+
           echo "${{steps.test-action.outputs.version-previous-release}}"
           echo "${{steps.test-action.outputs.version-previous-snapshot}}"
           echo "${{steps.test-action.outputs.version-current-release}}"

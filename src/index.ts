@@ -72,6 +72,13 @@ const repositoryName = actionsGithub.context.repo.repo;
     const previousManifest = await readManifestFile('./artifacts/manifest.json');
     actionsCore.endGroup();
 
+    const versionRelaseChanged = previousManifest?.release !== currentManifest.release;
+    const versionSnapshotChanged = previousManifest?.snapshot !== currentManifest.snapshot;
+    const versionChanged = versionRelaseChanged || versionSnapshotChanged;
+      
+    actionsCore.setOutput('version-changed', versionChanged);
+    actionsCore.setOutput('version-release-changed', versionRelaseChanged);
+    actionsCore.setOutput('version-snapshot-changed', versionSnapshotChanged);
     actionsCore.setOutput('version-previous-release', previousManifest?.release);
     actionsCore.setOutput('version-previous-snapshot', previousManifest?.snapshot);
   }
