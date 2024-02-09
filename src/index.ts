@@ -34,7 +34,7 @@ const githubToken = actionsCore.getInput('token');
       repositoryName: actionsGithub.context.repo.repo,
       token: githubToken,
       workflowRunId: artifacts[0].workflow_run?.id ?? 0
-    }}).then((response) => {
+    }, path: './data'}).then((response) => {
       console.log('Downloading Artifact:', response.downloadPath);
     });
 
