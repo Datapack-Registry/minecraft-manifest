@@ -35,30 +35,16 @@ const repositoryName = actionsGithub.context.repo.repo;
     'manifest'
   );
 
-  console.groupCollapsed('Found artifacts:')
-  artifacts.forEach((artifact) => {
-    console.groupCollapsed(`Artifact: ${artifact.name}`)
-    actionsCore.info(`- ID: ${artifact.id}`);
-    actionsCore.info(`- Node ID: ${artifact.node_id}`);
-    actionsCore.info(`- Workflow ID: ${artifact.workflow_run?.id}`);
-    actionsCore.info(`- Created at: ${artifact.created_at}`);
-    actionsCore.info(`- Expires at: ${artifact.expires_at}`);
-    actionsCore.info(`- Download: ${artifact.archive_download_url}`);
-    console.groupEnd()
-  })
-  console.groupEnd()
-
   const previousArtifact = artifacts[0];
 
   actionsCore.info('Found previous artifact:');
-  actionsCore.startGroup(`Artifact: ${previousArtifact.name}`);
-    actionsCore.info(`- ID: ${previousArtifact.id}`);
-    actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
-    actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
-    actionsCore.info(`- Created at: ${previousArtifact.created_at}`);
-    actionsCore.info(`- Expires at: ${previousArtifact.expires_at}`);
-    actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
-  actionsCore.endGroup();
+  actionsCore.info(`- Name: ${previousArtifact.name}`);
+  actionsCore.info(`- ID: ${previousArtifact.id}`);
+  actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
+  actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
+  actionsCore.info(`- Created at: ${previousArtifact.created_at}`);
+  actionsCore.info(`- Expires at: ${previousArtifact.expires_at}`);
+  actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
 
   actionsCore.endGroup();
 
