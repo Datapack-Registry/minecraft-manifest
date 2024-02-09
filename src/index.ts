@@ -42,8 +42,8 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.info(`- ID: ${previousArtifact.id}`);
   actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
   actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
-  actionsCore.info(`- Created at: ${previousArtifact.created_at}`);
-  actionsCore.info(`- Expires at: ${previousArtifact.expires_at}`);
+  actionsCore.info(`- Created at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
+  actionsCore.info(`- Expires at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
   actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
 
   actionsCore.endGroup();
