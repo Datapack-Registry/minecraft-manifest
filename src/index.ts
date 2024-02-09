@@ -1,7 +1,6 @@
 import * as actionsCore from '@actions/core';
 import * as actionsGithub from '@actions/github';
 import * as actionsArtifact from '@actions/artifact';
-import * as fs from 'fs/promises';
 
 import { fetchManifestData } from './fetch_manifest_data.ts';
 import { getArtifacts } from './get_artifacts.ts';
