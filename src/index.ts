@@ -36,7 +36,7 @@ const githubToken = actionsCore.getInput('token');
       archive_format: 'zip',
       artifact_id: artifacts[0].id
     }).then((response) => {
-      console.log('Downloading Artifact:', response.data);
+      console.log('Downloading Artifact:', new TextDecoder().decode(response.data as ArrayBuffer));
     });
     // await artifactClient.downloadArtifact(artifacts[0].id, {findBy: {
     //   repositoryOwner: actionsGithub.context.repo.owner,
