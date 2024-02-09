@@ -17,6 +17,7 @@ const githubToken = actionsCore.getInput('token');
     repo: actionsGithub.context.repo.repo,
     name: 'manifest'
   })).data.artifacts;
+
   console.log('Listing Artifacts...');
   artifacts.forEach((artifact) => {
     console.log('Artifact found:', new Date(artifact.created_at ?? '').toLocaleString('de-de'));
@@ -25,9 +26,14 @@ const githubToken = actionsCore.getInput('token');
 
   console.log('Latest Artifact found:', artifacts[0]);
 
-  artifactClient.downloadArtifact(artifacts[0].id).then((response) => {
-    console.log('Downloading Artifact:', response.downloadPath);
-  });
+  try {
+    artifactClient.downloadArtifact(artifacts[0].id).then((response) => {
+      console.log('Downloading Artifact:', response.downloadPath);
+    });
+  } catch (error) {
+    console.log(error);
+    
+  }
   
 
   const currentManifest = {
