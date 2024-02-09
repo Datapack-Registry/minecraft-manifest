@@ -25,7 +25,9 @@ const githubToken = actionsCore.getInput('token');
 
   console.log('Latest Artifact found:', artifacts[0]);
 
-  artifactClient.downloadArtifact(artifacts[0].id).then((response) => {
+  artifactClient.downloadArtifact(artifacts[0].id, {
+    path: './data/latest_manifest'
+  }).then((response) => {
     console.log('Downloading Artifact:', response.downloadPath);
   });
   
@@ -39,7 +41,7 @@ const githubToken = actionsCore.getInput('token');
   
   await fs.mkdir(`./data`, {recursive: true})
   await fs.writeFile(
-    './data/latest_manifest.json',
+    './data/current_manifest.json',
     JSON.stringify(currentManifest)
   )
 
