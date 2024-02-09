@@ -67,7 +67,7 @@ const repositoryName = actionsGithub.context.repo.repo;
   console.log('Writing new current manifest... Done!');
   
   console.log('Uploading new current artifact...');
-  artifactClient.uploadArtifact(
+  await artifactClient.uploadArtifact(
     'manifest',
     ['./artifacts/manifest.json'],
     './artifacts'
