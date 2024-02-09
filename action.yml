@@ -11,11 +11,17 @@ inputs:
     required: true
 
 outputs:
-  version-latest-release:
-    description: 'The latest Minecraft release version.'
+  version-current-release:
+    description: 'The current Minecraft release version fetched.'
 
-  version-latest-snapshot:
-    description: 'The latest Minecraft snapshot version.'
+  version-current-snapshot:
+    description: 'The current Minecraft snapshot version fetched.'
+
+  version-previous-release:
+    description: 'The previous Minecraft release version fetched.'
+
+  version-previous-snapshot:
+    description: 'The previous Minecraft snapshot version fetched.'
 
 runs:
   using: 'node20'

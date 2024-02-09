@@ -4,6 +4,9 @@ import * as actionsArtifact from '@actions/artifact';
 import * as fs from 'fs/promises';
 
 import { fetchManifestData } from './fetch_manifest_data.ts';
+import { getArtifacts } from './get_artifacts.ts';
+import { readManifestFile } from './read_manifest_file.ts';
+import { writeManifestFile } from './write_manifest_file.ts';
 
 
 const artifactClient = new actionsArtifact.DefaultArtifactClient();
@@ -11,60 +14,65 @@ const artifactClient = new actionsArtifact.DefaultArtifactClient();
 const inputManifestURL = actionsCore.getInput('manifest-url');
 const githubToken = actionsCore.getInput('token');
 
+const repositoryOwner = actionsGithub.context.repo.owner;
+const repositoryName = actionsGithub.context.repo.repo;
+
 (async () => {
-  const artifacts = (await actionsGithub.getOctokit(githubToken).rest.actions.listArtifactsForRepo({
-    owner: actionsGithub.context.repo.owner,
-    repo: actionsGithub.context.repo.repo,
-    name: 'manifest'
-  })).data.artifacts;
+  console.log('Fetching current manifest version...');
+  const currentManifest = await fetchManifestData(inputManifestURL);
+  console.log('Found latest version:', currentManifest);
+  console.log('Fetching current manifest version... Done!');
 
-  console.log('Listing Artifacts...');
-  artifacts.forEach((artifact) => {
-    console.log('Artifact found:', artifact.id, new Date(artifact.created_at ?? '').toLocaleString('de-de'));
-  })
-  console.log('Listing Artifacts... Done!');
+  actionsCore.setOutput('version-current-release', currentManifest.release);
+  actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
+  
+  console.log('Getting artifacts...');
+  const artifacts = await getArtifacts(
+    githubToken,
+    repositoryOwner,
+    repositoryName,
+    'manifest'
+  );
+  console.log('Found artifacts:', artifacts);
 
-  console.log('Latest Artifact found:', artifacts[0]);
+  const previousArtifact = artifacts[0];
+  console.log('Found previous artifact:', previousArtifact);
+  console.log('Getting artifacts... Done!');
 
-  try {
-    console.log('Downloading Artifact...');
+  if (previousArtifact) {
+    console.log('Downloading previous artifact...');
+    await artifactClient.downloadArtifact(
+      previousArtifact.id,
+      {
+        findBy: {
+          repositoryOwner,
+          repositoryName,
+          token: githubToken,
+          workflowRunId: previousArtifact.workflow_run?.id ?? 0
+        },
+        path: './artifacts'
+      }
+    );
+    console.log('Downloading previous artifact... Done!');
 
-    await artifactClient.downloadArtifact(artifacts[0].id, {findBy: {
-      repositoryOwner: actionsGithub.context.repo.owner,
-      repositoryName: actionsGithub.context.repo.repo,
-      token: githubToken,
-      workflowRunId: artifacts[0].workflow_run?.id ?? 0
-    }, path: './data'}).then((response) => {
-      console.log('Downloading Artifact:', response);
-    });
+    console.log('Reading previous manifest...');
+    const previousManifest = await readManifestFile('./artifacts/manifest.json');
+    console.log('Reading previous manifest... Done!');
 
-    console.log('Downloading Artifact... Done!');
-
-    console.log('Reading downloaded Artifact...');
-    console.log(await fs.readFile('./data/manifest.json', {encoding: 'utf-8'}))
-    console.log('Reading downloaded Artifact... Done!');
-  } catch (error) {
-    console.log(error);
-    
+    actionsCore.setOutput('version-previous-release', previousManifest?.release);
+    actionsCore.setOutput('version-previous-snapshot', previousManifest?.snapshot);
   }
-  
-  const currentManifest = {
-    latest: '',
-    snapshot: ''
-  }
-  
-  console.log('currentManifest:', currentManifest);
-  
-  await fs.mkdir(`./data`, {recursive: true})
-  await fs.writeFile(
-    './data/manifest.json',
-    JSON.stringify(currentManifest)
-  )
 
+  console.log('Writing new current manifest...');
+  await writeManifestFile('./artifacts/manifest.json', currentManifest);
+  console.log('Writing new current manifest... Done!');
+  
+  console.log('Uploading current artifact...');
   artifactClient.uploadArtifact(
     'manifest',
-    [`./data/manifest.json`],
-    `./data`
+    ['./artifacts/manifest.json'],
+    './artifacts'
   )
+  console.log('Uploading current artifact... Done!');
 })()
 
