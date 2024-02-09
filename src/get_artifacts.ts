@@ -10,6 +10,6 @@ export function getArtifacts(
   return getOctokit(token).rest.actions.listArtifactsForRepo({
     owner,
     repo,
-    name
+    name,
   }).then((response) => response.data.artifacts);
 }

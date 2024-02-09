@@ -19,7 +19,7 @@ const repositoryName = actionsGithub.context.repo.repo;
 (async () => {
   actionsCore.startGroup('Fetching current manifest version...')
   const currentManifest = await fetchManifestData(inputManifestURL);
-  actionsCore.info(`Found latest version:`);
+  actionsCore.info('Found latest version:');
   actionsCore.info(`- Release: ${currentManifest.release}`);
   actionsCore.info(`- Snapshot: ${currentManifest.snapshot}`);
   actionsCore.endGroup();
@@ -35,11 +35,30 @@ const repositoryName = actionsGithub.context.repo.repo;
     'manifest'
   );
 
-  actionsCore.endGroup();
-  console.log('Found artifacts:', artifacts);
+  actionsCore.info('Found artifacts:');
+  artifacts.forEach((artifact) => {
+    actionsCore.startGroup(`Artifact: ${artifact.name}`);
+    actionsCore.info(`- ID: ${artifact.id}`);
+    actionsCore.info(`- Node ID: ${artifact.node_id}`);
+    actionsCore.info(`- Workflow ID: ${artifact.workflow_run?.id}`);
+    actionsCore.info(`- Created at: ${artifact.created_at}`);
+    actionsCore.info(`- Expires at: ${artifact.expires_at}`);
+    actionsCore.info(`- Download: ${artifact.archive_download_url}`);
+    actionsCore.endGroup()
+  })
 
   const previousArtifact = artifacts[0];
-  console.log('Found previous artifact:', previousArtifact);
+
+  actionsCore.info('Found previous artifact:');
+  actionsCore.startGroup(`Artifact: ${previousArtifact.name}`);
+    actionsCore.info(`- ID: ${previousArtifact.id}`);
+    actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
+    actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
+    actionsCore.info(`- Created at: ${previousArtifact.created_at}`);
+    actionsCore.info(`- Expires at: ${previousArtifact.expires_at}`);
+    actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
+  actionsCore.endGroup();
+
   actionsCore.endGroup();
 
   if (previousArtifact) {

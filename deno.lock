@@ -952,5 +952,22 @@
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate.js": "b9f9ad9457d3f12f28b1fb35c555f57443427f74decb403113d67364e4f2caf4",
     "https://deno.land/x/denoflate@1.2.1/pkg/denoflate_bg.wasm.js": "d581956245407a2115a3d7e8d85a9641c032940a8e810acbd59ca86afd34d44d",
     "https://deno.land/x/esbuild@v0.19.12/mod.js": "fc8d97babee1f469d8ad409e62e0cf13bf72eca02b4f157b86238fda78f1e65e"
+  },
+  "workspace": {
+    "dependencies": [
+      "npm:@actions/artifact",
+      "npm:@actions/core",
+      "npm:@actions/github",
+      "npm:@actions/tool-cache"
+    ],
+    "packageJson": {
+      "dependencies": [
+        "npm:@actions/artifact@^2.1.1",
+        "npm:@actions/core@^1.10.1",
+        "npm:@actions/github@^6.0.0",
+        "npm:@types/node@^20.11.10",
+        "npm:typescript@^5.3.3"
+      ]
+    }
   }
 }
