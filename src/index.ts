@@ -24,6 +24,10 @@ const githubToken = actionsCore.getInput('token');
   console.log('Listing Artifacts... Done!');
 
   console.log('Latest Artifact found:', artifacts[0]);
+
+  artifactClient.downloadArtifact(artifacts[0].id).then((response) => {
+    console.log('Downloading Artifact:', response.downloadPath);
+  });
   
 
   const currentManifest = {

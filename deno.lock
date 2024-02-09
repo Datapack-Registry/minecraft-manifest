@@ -9,6 +9,7 @@
       "npm:@actions/github": "npm:@actions/github@5.1.1_@octokit+core@3.6.0",
       "npm:@actions/github@^6.0.0": "npm:@actions/github@6.0.0_@octokit+core@5.1.0",
       "npm:@actions/tool-cache": "npm:@actions/tool-cache@2.0.1",
+      "npm:@types/node": "npm:@types/node@18.16.19",
       "npm:@types/node@^20.11.10": "npm:@types/node@20.11.16",
       "npm:typescript@^5.3.3": "npm:typescript@5.3.3"
     },
