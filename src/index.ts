@@ -17,7 +17,7 @@ const repositoryOwner = actionsGithub.context.repo.owner;
 const repositoryName = actionsGithub.context.repo.repo;
 
 (async () => {
-  actionsCore.startGroup('Fetching current manifest version...')
+  actionsCore.startGroup(`Fetching current manifest version from "${inputManifestURL}" ...`)
   const currentManifest = await fetchManifestData(inputManifestURL);
   actionsCore.info('Found latest version:');
   actionsCore.info(`- Release: ${currentManifest.release}`);
@@ -27,8 +27,8 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.setOutput('version-current-release', currentManifest.release);
   actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
   
-  actionsCore.startGroup('Getting artifacts...');
-  actionsCore.info('Searching existing artifacts...');
+  actionsCore.startGroup('Getting artifacts ...');
+  actionsCore.info('Searching existing artifacts ...');
 
   const artifacts = await getArtifacts(
     githubToken,
@@ -53,7 +53,7 @@ const repositoryName = actionsGithub.context.repo.repo;
   actionsCore.endGroup();
 
   if (previousArtifact) {
-    actionsCore.startGroup('Downloading previous artifact...');
+    actionsCore.startGroup('Downloading previous artifact ...');
     await artifactClient.downloadArtifact(
       previousArtifact.id,
       {
@@ -68,7 +68,7 @@ const repositoryName = actionsGithub.context.repo.repo;
     );
     actionsCore.endGroup();
 
-    actionsCore.startGroup('Reading previous manifest...');
+    actionsCore.startGroup('Reading previous manifest ...');
     const previousManifest = await readManifestFile('./artifacts/manifest.json');
     actionsCore.endGroup();
 
@@ -76,11 +76,11 @@ const repositoryName = actionsGithub.context.repo.repo;
     actionsCore.setOutput('version-previous-snapshot', previousManifest?.snapshot);
   }
   
-  actionsCore.startGroup('Writing new current manifest...');
+  actionsCore.startGroup('Writing new current manifest ...');
   await writeManifestFile('./artifacts/manifest.json', currentManifest);
   actionsCore.endGroup();
   
-  actionsCore.startGroup('Uploading new current artifact...');
+  actionsCore.startGroup('Uploading new current artifact ...');
   await artifactClient.uploadArtifact(
     'manifest',
     ['./artifacts/manifest.json'],
