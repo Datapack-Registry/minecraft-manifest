@@ -45,18 +45,18 @@ const repositoryName = actionsGithub.context.repo.repo;
 
   const previousArtifact = artifacts[0];
 
-  actionsCore.info('Previous artifact:');
-  actionsCore.info(`- Name: ${previousArtifact.name}`);
-  actionsCore.info(`- ID: ${previousArtifact.id}`);
-  actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
-  actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
-  actionsCore.info(`- Created at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
-  actionsCore.info(`- Expires at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
-  actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
-
-  actionsCore.endGroup();
-
   if (previousArtifact) {
+    actionsCore.info('Previous artifact:');
+    actionsCore.info(`- Name: ${previousArtifact.name}`);
+    actionsCore.info(`- ID: ${previousArtifact.id}`);
+    actionsCore.info(`- Node ID: ${previousArtifact.node_id}`);
+    actionsCore.info(`- Workflow ID: ${previousArtifact.workflow_run?.id}`);
+    actionsCore.info(`- Created at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
+    actionsCore.info(`- Expires at: ${new Date(previousArtifact.created_at ?? '').toLocaleString()}`);
+    actionsCore.info(`- Download: ${previousArtifact.archive_download_url}`);
+
+    actionsCore.endGroup();
+
     actionsCore.startGroup('Downloading previous artifact ...');
     await artifactClient.downloadArtifact(
       previousArtifact.id,
