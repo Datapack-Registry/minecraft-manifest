@@ -24,24 +24,24 @@ A big advantage of this action compared to other actions is that no additional f
 ```yml
 - name: 'Print output'
   run: |
-    echo "Changed: ${{steps.test-action.outputs.version-changed}}"
-    echo "Release changed: ${{steps.test-action.outputs.version-release-changed}}"
-    echo "Snapshot changed: ${{steps.test-action.outputs.version-snapshot-changed}}"
-    echo "Previous release version: ${{steps.test-action.outputs.version-previous-release}}"
-    echo "Previous snapshot version: ${{steps.test-action.outputs.version-previous-snapshot}}"
-    echo "Current release version: ${{steps.test-action.outputs.version-current-release}}"
-    echo "Current snapshot version: ${{steps.test-action.outputs.version-current-snapshot}}"
+    echo "Changed: ${{steps.version-change.outputs.version-changed}}"
+    echo "Release changed: ${{steps.version-change.outputs.version-release-changed}}"
+    echo "Snapshot changed: ${{steps.version-change.outputs.version-snapshot-changed}}"
+    echo "Previous release version: ${{steps.version-change.outputs.version-previous-release}}"
+    echo "Previous snapshot version: ${{steps.version-change.outputs.version-previous-snapshot}}"
+    echo "Current release version: ${{steps.version-change.outputs.version-current-release}}"
+    echo "Current snapshot version: ${{steps.version-change.outputs.version-current-snapshot}}"
 ```
 
-|          Parameter          |  Datatype | Description                                         |
-|:---------------------------:|:---------:|-----------------------------------------------------|
-|      `version-changed`      | `boolean` | Whether the release or snapshot version has changed |
-|  `version-release-changed`  | `boolean` | Whether the release version has changed             |
-| `version-snapshot-changed`  | `boolean` | Whether the snapshot version has changed            |
-| `version-current-release`   | `string`  | The current Minecraft release version fetched       |
-| `version-current-snapshot`  | `string`  | The current Minecraft snapshot version fetched      |
-| `version-previous-release`  | `string`  | The previous Minecraft release version fetched      |
-| `version-previous-snapshot` | `string`  | The previous Minecraft snapshot version fetched     |
+|          Parameter          |  Datatype | Description                                           |
+|:---------------------------:|:---------:|-------------------------------------------------------|
+|      `version-changed`      | `boolean` | Whether the release or snapshot version has changed   |
+|  `version-release-changed`  | `boolean` | Whether the release version has changed               |
+| `version-snapshot-changed`  | `boolean` | Whether the snapshot version has changed              |
+| `version-current-release`   | `string`  | The current Minecraft release version fetched         |
+| `version-current-snapshot`  | `string`  | The current Minecraft snapshot version fetched        |
+| `version-previous-release`  | `string`  | The previous Minecraft release version from artifact  |
+| `version-previous-snapshot` | `string`  | The previous Minecraft snapshot version from artifact |
 
 ## Usage
 ```yml
@@ -69,13 +69,13 @@ jobs:
       
       - name: 'Print output'
         run: |
-          echo "Changed: ${{steps.test-action.outputs.version-changed}}"
-          echo "Release changed: ${{steps.test-action.outputs.version-release-changed}}"
-          echo "Snapshot changed: ${{steps.test-action.outputs.version-snapshot-changed}}"
-          echo "Previous release version: ${{steps.test-action.outputs.version-previous-release}}"
-          echo "Previous snapshot version: ${{steps.test-action.outputs.version-previous-snapshot}}"
-          echo "Current release version: ${{steps.test-action.outputs.version-current-release}}"
-          echo "Current snapshot version: ${{steps.test-action.outputs.version-current-snapshot}}"
+          echo "Changed: ${{steps.version-change.outputs.version-changed}}"
+          echo "Release changed: ${{steps.version-change.outputs.version-release-changed}}"
+          echo "Snapshot changed: ${{steps.version-change.outputs.version-snapshot-changed}}"
+          echo "Previous release version: ${{steps.version-change.outputs.version-previous-release}}"
+          echo "Previous snapshot version: ${{steps.version-change.outputs.version-previous-snapshot}}"
+          echo "Current release version: ${{steps.version-change.outputs.version-current-release}}"
+          echo "Current snapshot version: ${{steps.version-change.outputs.version-current-snapshot}}"
 
 
 ```
