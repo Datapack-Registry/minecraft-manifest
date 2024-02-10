@@ -42,6 +42,7 @@
   },
   "imports": {
     "fs/promises": "node:fs/promises",
+    "path": "node:path",
     "@actions/core": "npm:@actions/core",
     "@actions/github": "npm:@actions/github",
     "@actions/artifact": "npm:@actions/artifact",
