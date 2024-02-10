@@ -1,6 +1,10 @@
 name: 'Minecraft Version Manifest Info'
 description: 'A GitHub action to get infos about Minecraft version manifest.'
 author: 'Mqxx'
+branding:
+  icon: 'info'
+  color: 'purple'
+
 inputs:
   token:
     description: 'GitHub token.'
