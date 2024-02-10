@@ -28,10 +28,10 @@ outputs:
     description: 'The current Minecraft snapshot version fetched.'
 
   version-previous-release:
-    description: 'The previous Minecraft release version fetched.'
+    description: 'The previous Minecraft release version from artifact.'
 
   version-previous-snapshot:
-    description: 'The previous Minecraft snapshot version fetched.'
+    description: 'The previous Minecraft snapshot version from artifact.'
   
 
 runs:
