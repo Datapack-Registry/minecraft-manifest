@@ -12,10 +12,10 @@ with:
   token: ${{secrets.GITHUB_TOKEN}}
 ```
 
-|    Parameter   | Datatype | Required | Default Value                                                     | Description                    |
-|:--------------:|:--------:|:--------:|-------------------------------------------------------------------|--------------------------------|
-|     `token`    |  string  |    yes   |                                                                   | GitHub token                   |
-| `manifest-url` |  string  |    no    | 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json' | An URL to the version manifest |
+|    Parameter   | Datatype | Required | Default Value                                                              | Description                    |
+|:--------------:|:--------:|:--------:|----------------------------------------------------------------------------|--------------------------------|
+|     `token`    |  string  |    yes   |                                                                            | GitHub token                   |
+| `manifest-url` |  string  |    no    | [API URL](https://piston-meta.mojang.com/mc/game/version_manifest_v2.json) | An URL to the version manifest |
 
 ## Output
 
