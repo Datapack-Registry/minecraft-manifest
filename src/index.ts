@@ -19,13 +19,17 @@ const repositoryName = actionsGithub.context.repo.repo;
 (async () => {
   actionsCore.startGroup(`Fetching current manifest version from "${inputManifestURL}" ...`)
   const currentManifest = await fetchManifestData(inputManifestURL);
+  const releaseVersion = currentManifest.versions.find(version => version.id == currentManifest.latest.release);
+  const snapshotVersion = currentManifest.versions.find(version => version.id == currentManifest.latest.snapshot);
   actionsCore.info('Found latest version:');
-  actionsCore.info(`- Release: ${currentManifest.release}`);
-  actionsCore.info(`- Snapshot: ${currentManifest.snapshot}`);
+  actionsCore.info(`- Release: ${currentManifest.latest.release} (url: ${releaseVersion?.url})`);
+  actionsCore.info(`- Snapshot: ${currentManifest.latest.snapshot} (url: ${snapshotVersion?.url})`);
   actionsCore.endGroup();
 
-  actionsCore.setOutput('version-current-release', currentManifest.release);
-  actionsCore.setOutput('version-current-snapshot', currentManifest.snapshot);
+  actionsCore.setOutput('version-current-release', currentManifest.latest.release);
+  actionsCore.setOutput('version-current-release-url', releaseVersion?.url);
+  actionsCore.setOutput('version-current-snapshot', currentManifest.latest.snapshot);
+  actionsCore.setOutput('version-current-snapshot-url', snapshotVersion?.url);
   
   actionsCore.startGroup('Getting artifacts ...');
   actionsCore.info('Searching existing artifacts ...');
@@ -72,8 +76,8 @@ const repositoryName = actionsGithub.context.repo.repo;
     const previousManifest = await readManifestFile('./artifacts/manifest.json');
     actionsCore.endGroup();
 
-    const versionRelaseChanged = previousManifest?.release !== currentManifest.release;
-    const versionSnapshotChanged = previousManifest?.snapshot !== currentManifest.snapshot;
+    const versionRelaseChanged = previousManifest?.release !== currentManifest.latest.release;
+    const versionSnapshotChanged = previousManifest?.snapshot !== currentManifest.latest.snapshot;
     const versionChanged = versionRelaseChanged || versionSnapshotChanged;
       
     actionsCore.setOutput('version-changed', versionChanged);
@@ -84,7 +88,7 @@ const repositoryName = actionsGithub.context.repo.repo;
   }
   
   actionsCore.startGroup('Writing new current manifest ...');
-  await writeManifestFile('./artifacts/manifest.json', currentManifest);
+  await writeManifestFile('./artifacts/manifest.json', currentManifest.latest);
   actionsCore.endGroup();
   
   actionsCore.startGroup('Uploading new current artifact ...');
@@ -95,4 +99,3 @@ const repositoryName = actionsGithub.context.repo.repo;
   )
   actionsCore.endGroup();
 })()
-

@@ -30,18 +30,22 @@ A big advantage of this action compared to other actions is that no additional f
     echo "Previous release version: ${{steps.version-change.outputs.version-previous-release}}"
     echo "Previous snapshot version: ${{steps.version-change.outputs.version-previous-snapshot}}"
     echo "Current release version: ${{steps.version-change.outputs.version-current-release}}"
+    echo "Release version.json URL: ${{steps.version-change.outputs.version-current-release-url}}"
     echo "Current snapshot version: ${{steps.version-change.outputs.version-current-snapshot}}"
+    echo "Snapshot version.json URL: ${{steps.version-change.outputs.version-current-snapshot-url}}"
 ```
 
-|          Parameter          |  Datatype | Description                                           |
-|:---------------------------:|:---------:|-------------------------------------------------------|
-|      `version-changed`      | `boolean` | Whether the release or snapshot version has changed   |
-|  `version-release-changed`  | `boolean` | Whether the release version has changed               |
-| `version-snapshot-changed`  | `boolean` | Whether the snapshot version has changed              |
-| `version-current-release`   | `string`  | The current Minecraft release version fetched         |
-| `version-current-snapshot`  | `string`  | The current Minecraft snapshot version fetched        |
-| `version-previous-release`  | `string`  | The previous Minecraft release version from artifact  |
-| `version-previous-snapshot` | `string`  | The previous Minecraft snapshot version from artifact |
+|          Parameter              |  Datatype | Description                                           |
+|:-------------------------------:|:---------:|-------------------------------------------------------|
+|      `version-changed`          | `boolean` | Whether the release or snapshot version has changed   |
+|  `version-release-changed`      | `boolean` | Whether the release version has changed               |
+| `version-snapshot-changed`      | `boolean` | Whether the snapshot version has changed              |
+| `version-current-release`       | `string`  | The current Minecraft release version fetched         |
+| `version-current-release-url`   | `string`  | The download url of the release version.json file.    |
+| `version-current-snapshot`      | `string`  | The current Minecraft snapshot version fetched        |
+| `version-current-snapshot-url`  | `string`  | The download url of the snapshot version.json file.   |
+| `version-previous-release`      | `string`  | The previous Minecraft release version from artifact  |
+| `version-previous-snapshot`     | `string`  | The previous Minecraft snapshot version from artifact |
 
 ## Usage
 ```yml
@@ -75,7 +79,9 @@ jobs:
           echo "Previous release version: ${{steps.version-change.outputs.version-previous-release}}"
           echo "Previous snapshot version: ${{steps.version-change.outputs.version-previous-snapshot}}"
           echo "Current release version: ${{steps.version-change.outputs.version-current-release}}"
+          echo "Release version.json URL: ${{steps.version-change.outputs.version-current-release-url}}"
           echo "Current snapshot version: ${{steps.version-change.outputs.version-current-snapshot}}"
+          echo "Snapshot version.json URL: ${{steps.version-change.outputs.version-current-snapshot-url}}"
 
 
 ```
