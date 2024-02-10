@@ -28,8 +28,14 @@ outputs:
   version-current-release:
     description: 'The current Minecraft release version fetched.'
 
+  version-current-release-url:
+    description: 'The download url of the release version.json file.'
+
   version-current-snapshot:
     description: 'The current Minecraft snapshot version fetched.'
+
+  version-current-snapshot-url:
+    description: 'The download url of the snapshot version.json file.'
 
   version-previous-release:
     description: 'The previous Minecraft release version from artifact.'

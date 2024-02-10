@@ -36,4 +36,6 @@ jobs:
           echo "${{steps.test-action.outputs.version-previous-release}}"
           echo "${{steps.test-action.outputs.version-previous-snapshot}}"
           echo "${{steps.test-action.outputs.version-current-release}}"
+          echo "${{steps.test-action.outputs.version-current-release-url}}"
           echo "${{steps.test-action.outputs.version-current-snapshot}}"
+          echo "${{steps.test-action.outputs.version-current-snapshot-url}}"
