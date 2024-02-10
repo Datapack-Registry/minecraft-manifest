@@ -7,17 +7,41 @@ A big advantage of this action compared to other actions is that no additional f
 
 ## Input
 ```yml
-uses: Datapack-Registry/minecraft-manifest@main
-with:
-  token: ${{secrets.GITHUB_TOKEN}}
+- name: 'Test for version change'
+  id: 'version-change'
+  uses: Datapack-Registry/minecraft-manifest@main
+  with:
+    token: ${{secrets.GITHUB_TOKEN}}
+    manifest-url: 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json'
 ```
 
 |    Parameter   | Datatype | Required | Default Value                                                                                                                                | Description                    |
 |:--------------:|:--------:|:--------:|----------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------|
-|     `token`    |  string  |    yes   |                                                                                                                                              | GitHub token                   |
-| `manifest-url` |  string  |    no    | [API URL](https://piston-meta.mojang.com/mc/game/version_manifest_v2.json 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json') | An URL to the version manifest |
+|     `token`    | `string` |    yes   |                                                                                                                                              | GitHub token                   |
+| `manifest-url` | `string` |    no    | [API URL](https://piston-meta.mojang.com/mc/game/version_manifest_v2.json 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json') | An URL to the version manifest |
 
 ## Output
+```yml
+- name: 'Print output'
+  run: |
+    echo "Changed: ${{steps.test-action.outputs.version-changed}}"
+    echo "Release changed: ${{steps.test-action.outputs.version-release-changed}}"
+    echo "Snapshot changed: ${{steps.test-action.outputs.version-snapshot-changed}}"
+    echo "Previous release version: ${{steps.test-action.outputs.version-previous-release}}"
+    echo "Previous snapshot version: ${{steps.test-action.outputs.version-previous-snapshot}}"
+    echo "Current release version: ${{steps.test-action.outputs.version-current-release}}"
+    echo "Current snapshot version: ${{steps.test-action.outputs.version-current-snapshot}}"
+```
+
+|          Parameter          |  Datatype | Description                                         |
+|:---------------------------:|:---------:|-----------------------------------------------------|
+|      `version-changed`      | `boolean` | Whether the release or snapshot version has changed |
+|  `version-release-changed`  | `boolean` | Whether the release version has changed             |
+| `version-snapshot-changed`  | `boolean` | Whether the snapshot version has changed            |
+| `version-current-release`   | `string`  | The current Minecraft release version fetched       |
+| `version-current-snapshot`  | `string`  | The current Minecraft snapshot version fetched      |
+| `version-previous-release`  | `string`  | The previous Minecraft release version fetched      |
+| `version-previous-snapshot` | `string`  | The previous Minecraft snapshot version fetched     |
 
 ## Usage
 ```yml
