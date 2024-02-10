@@ -5,6 +5,20 @@ This action fetches the latest release and snapshot version from the [piston-met
 
 A big advantage of this action compared to other actions is that no additional files are needed within the repository to cache the latest version. All necessary information is stored in artifacts.
 
+## Input
+```yml
+uses: Datapack-Registry/minecraft-manifest@main
+with:
+  token: ${{secrets.GITHUB_TOKEN}}
+```
+
+|    Parameter   | Datatype | Required | Default Value                                                     | Description                    |
+|:--------------:|:--------:|:--------:|-------------------------------------------------------------------|--------------------------------|
+|     `token`    |  string  |    yes   |                                                                   | GitHub token                   |
+| `manifest-url` |  string  |    no    | 'https://piston-meta.mojang.com/mc/game/version_manifest_v2.json' | An URL to the version manifest |
+
+## Output
+
 ## Usage
 ```yml
 ...
