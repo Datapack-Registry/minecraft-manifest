@@ -19,8 +19,8 @@ const repositoryName = actionsGithub.context.repo.repo;
 (async () => {
   actionsCore.startGroup(`Fetching current manifest version from "${inputManifestURL}" ...`)
   const currentManifest = await fetchManifestData(inputManifestURL);
-  const releaseVersion = currentManifest.versions.find(version => version.id == currentManifest.latest.release);
-  const snapshotVersion = currentManifest.versions.find(version => version.id == currentManifest.latest.snapshot);
+  const releaseVersion = currentManifest.versions.find(version => version.id === currentManifest.latest.release);
+  const snapshotVersion = currentManifest.versions.find(version => version.id === currentManifest.latest.snapshot);
   actionsCore.info('Found latest version:');
   actionsCore.info(`- Release: ${currentManifest.latest.release} (url: ${releaseVersion?.url})`);
   actionsCore.info(`- Snapshot: ${currentManifest.latest.snapshot} (url: ${snapshotVersion?.url})`);
