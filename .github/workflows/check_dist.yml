@@ -17,17 +17,14 @@ jobs:
 
     steps:
       - name: 'Setup Repository (${{github.event.repository.name}})'
-        id: 'checkout'
         uses: actions/checkout@v4
 
       - name: 'Setup Deno'
-        id: 'setup-deno'
         uses: denoland/setup-deno@v1
         with:
           deno-version: v1.x
 
       - name: 'Build dist/ Directory'
-        id: 'build'
         run: deno task build
 
       - name: 'Compare Directories'
@@ -40,7 +37,6 @@ jobs:
           fi
 
       - name: 'Upload Artifact'
-        id: 'upload'
         if: ${{ failure() && steps.diff.outcome == 'failure' }}
         uses: actions/upload-artifact@v4
         with:
