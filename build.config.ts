@@ -23,7 +23,7 @@ const tsConfig : esbuild.BuildOptions = {
   bundle: true,
   platform: 'node',
   target: 'node20',
-  sourcemap: 'external',
+  sourcemap: false,
   keepNames: true
 }
 
