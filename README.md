@@ -1,6 +1,7 @@
 # Minecraft Manifest
 
 [![Check Transpiled JavaScript](https://github.com/Datapack-Registry/minecraft-manifest/actions/workflows/check_dist.yml/badge.svg)](https://github.com/Datapack-Registry/minecraft-manifest/actions/workflows/check_dist.yml)
+[![Test Latest Build Action](https://github.com/Datapack-Registry/minecraft-manifest/actions/workflows/test_action.yml/badge.svg)](https://github.com/Datapack-Registry/minecraft-manifest/actions/workflows/test_action.yml)
 
 A GitHub action to get infos about the minecraft manifest version.
 
