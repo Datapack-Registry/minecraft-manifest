@@ -29,13 +29,13 @@ jobs:
       
       - name: 'Print'
         run: |
-          echo "${{steps.test-action.outputs.version-changed}}"
-          echo "${{steps.test-action.outputs.version-release-changed}}"
-          echo "${{steps.test-action.outputs.version-snapshot-changed}}"
+          echo "version-changed: ${{steps.test-action.outputs.version-changed}}"
+          echo "version-release-changed: ${{steps.test-action.outputs.version-release-changed}}"
+          echo "version-snapshot-changed: ${{steps.test-action.outputs.version-snapshot-changed}}"
 
-          echo "${{steps.test-action.outputs.version-previous-release}}"
-          echo "${{steps.test-action.outputs.version-previous-snapshot}}"
-          echo "${{steps.test-action.outputs.version-current-release}}"
-          echo "${{steps.test-action.outputs.version-current-release-url}}"
-          echo "${{steps.test-action.outputs.version-current-snapshot}}"
-          echo "${{steps.test-action.outputs.version-current-snapshot-url}}"
+          echo "version-previous-release: ${{steps.test-action.outputs.version-previous-release}}"
+          echo "version-previous-snapshot: ${{steps.test-action.outputs.version-previous-snapshot}}"
+          echo "version-current-release: ${{steps.test-action.outputs.version-current-release}}"
+          echo "version-current-release-url: ${{steps.test-action.outputs.version-current-release-url}}"
+          echo "version-current-snapshot: ${{steps.test-action.outputs.version-current-snapshot}}"
+          echo "version-current-snapshot-url: ${{steps.test-action.outputs.version-current-snapshot-url}}"
